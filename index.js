@@ -73,6 +73,26 @@ async function run() {
       res.send(result);
     });
 
+    // User Post Route
+    app.post('/users', async(req, res) => {
+      const user =req.body;
+      const checkUser = await usersCollection.findOne({ email: user?.email });
+      
+      if(checkUser?._id){
+        return res.send("Login Successfull");
+      }
+
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
+    });
+
+    // User Get Route
+    app.get('/users', async(req, res) => {
+      const user = usersCollection.find();
+      const result = await user.toArray();
+      res.send(result);
+    });
+
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
   }
