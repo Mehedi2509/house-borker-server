@@ -60,6 +60,7 @@ async function run() {
     });
 
     // single sellpost get route
+    
     app.get('/sellposts/:id', async (req, res) =>{
       const id = req.params.id;
       const result = await sellPostsCollection.findOne({_id: new ObjectId(id)});
